@@ -1,4 +1,5 @@
 require "colorize"
+require "byebug"
 
 class Tile
   attr_reader :value
@@ -21,6 +22,7 @@ class Tile
   end
 
   def value=(new_value)
+    # debugger
     if given?
       puts "You can't change the value of a given tile."
     else
