@@ -26,22 +26,25 @@ class Board
   end
 
   def [](pos)
+    debugger
     pos = x,y
     grid[x][y]
   end
 
   def []=(pos, value)
+    debugger
     x, y = pos
     tile = grid[x][y]
-    tile.value = new_value
+    tile.value = value
   end
 
   def columns
     rows.transpose!
+    # grid? instd of rows
   end
 
   def render
-    puts "(0..8).to_a.join(" ")"
+    puts "  " + (0..8).to_a.join(" ")
     grid.each_with_index do |row, i|
       puts "#{i} #{row.join(" ")}"
     end
@@ -52,7 +55,11 @@ class Board
     grid.size
   end
 
-  alias_method :rows, :size
+  def rows
+    grid#.map { |row| row}
+  end
+
+  # alias_method :rows, :size
 
   def solved?
     rows.all? { |row| solved_set?(row) } &&
@@ -62,7 +69,7 @@ class Board
 
   def solved_set?(tiles)
     nums = tiles.map(&:value)
-    nums.sort == (1..9)
+    nums.sort == (1..9).to_a
   end
 
   def square(idx)
@@ -70,9 +77,9 @@ class Board
     x = (idx / 3) * 3
     y = (idx % 3) * 3
 
-    (x..x + 3).each do |j|
-      (y..y + 3).each do |i|
-        tiles << self[i, j]
+    (x...x + 3).each do |j|
+      (y...y + 3).each do |i|
+        tiles << self[[i, j]]
       end
     end
 
@@ -80,7 +87,7 @@ class Board
   end
 
   def squares
-    (0..8).to_a.each { |i| square(i) }
+    (0..8).to_a.map { |i| square(i) }
   end
 
 end
