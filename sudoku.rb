@@ -53,7 +53,6 @@ class SudokuGame
 
   def parse_pos(pos)
     pos.split(",").map{|char| Integer(char)}
-      # |char| Integer(char)
   end
 
   def parse_val(val)
@@ -68,7 +67,7 @@ class SudokuGame
   end
 
   def run
-    debugger
+    # debugger
     play_turn until solved?
     board.render
     puts "Congratulations, you win!"

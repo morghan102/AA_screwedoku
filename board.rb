@@ -40,7 +40,6 @@ class Board
 
   def columns
     rows.transpose!
-    # grid? instd of rows
   end
 
   def render
